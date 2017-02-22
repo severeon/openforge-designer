@@ -1,6 +1,6 @@
-const webpack = require('webpack');
-const path = require('path');
-const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const webpack = require('webpack')
+const path = require('path')
+const OpenBrowserPlugin = require('open-browser-webpack-plugin')
 
 module.exports = {
   devServer: {
@@ -29,4 +29,4 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new OpenBrowserPlugin({ url: 'http://localhost:8080' })
   ]
-};
+}
