@@ -46,12 +46,13 @@
     "eslint-plugin-react": "latest",
     "eslint-plugin-standard": "latest",
     "husky": "^0.12.0",
+    "interactjs": "^1.2.8",
     "open-browser-webpack-plugin": "0.0.3",
+    "react-router": "latest",
     "style-loader": "~0.13.1",
     "validate-commit-msg": "2.x",
     "webpack": "latest",
-    "webpack-dev-server": "latest",
-    "react-router": "latest"
+    "webpack-dev-server": "latest"
   },
   "keywords": [
     "es6",
