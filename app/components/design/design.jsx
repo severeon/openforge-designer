@@ -10,6 +10,8 @@ import MenuItem from 'react-bootstrap/lib/MenuItem'
 import PartDashboard from './part-dashboard'
 import DesignGrid from './design-grid'
 
+import Tiles from './tiles'
+
 import './styles/design.css'
 
 export default React.createClass({
@@ -30,10 +32,10 @@ export default React.createClass({
 
         <Row>
           <Col lg={3}>
-            <PartDashboard />
+            <PartDashboard onAddPart={part => this.designGrid.onAddPart(part) } />
           </Col>
           <Col lg={9}>
-            <DesignGrid />
+            <DesignGrid ref={designGrid => { this.designGrid = designGrid }} />
           </Col>
         </Row>
       </Grid>

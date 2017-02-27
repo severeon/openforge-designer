@@ -1,41 +1,32 @@
 import React from 'react'
 
-import Interact from 'interactjs'
-
 import Tiles from './tiles/index'
 
 import './styles/part-dashboard.css'
 
-export default React.createClass({
-  displayName: 'part-dashboard',
-
-  componentDidMount () {
-    console.log('setting up interact')
-    let gridTarget = Interact.createSnapGrid({
-      x: 50,
-      y: 50
-    })
-
-    setTimeout(() => {
-      Interact('#part-dashboard .part .tile')
-      .draggable({
-        snap: {
-          targets: [gridTarget]
-        },
-        restrict: {
-          restriction: 'body'
-        }
-      })
-    }, 1000)
-  },
+class PartDashboard extends React.PureComponent {
+  onAddPart (codename) {
+    return () => {
+      this.props.onAddPart(codename)
+    }
+  }
 
   render () {
     let parts = []
 
     for (let codename in Tiles.floor) {
-      let tile = Tiles.floor[codename]
+      let Tile = Tiles.floor[codename]
+      let tileProps = {
+        key: codename,
+        className: 'part',
+        title: 'Click to Add to Grid',
+        onClick: this.onAddPart(codename)
+      }
+
       parts.push(
-        <div key={codename} className='part'>{tile}</div>
+        <div {...tileProps}>
+          <Tile />
+        </div>
       )
     }
 
@@ -45,4 +36,12 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
+
+PartDashboard.propTypes = {
+  onAddPart: React.PropTypes.func.isRequired
+}
+
+PartDashboard.displayName = 'part-dashboard'
+
+export default PartDashboard

@@ -2,11 +2,21 @@ import React from 'react'
 
 import RectangularTile from './rectangular-tile'
 
+const createRectangle = (width, height, className) => {
+  return React.createClass({
+    displayName: className,
+    render () {
+      let props = {width, height, className: className + ' tile'}
+      return <RectangularTile {...props} />
+    }
+  })
+}
+
 const tiles = {
   floor: {
-    E: <RectangularTile width={4} height={4} className='e-tile tile' />,
-    EA: <RectangularTile width={6} height={6} className='ea-tile tile' />,
-    R: <RectangularTile width={4} height={8} className='r-tile tile' />
+    E: createRectangle(4, 4, 'e-tile'),
+    EA: createRectangle(4, 6, 'ea-tile'),
+    R: createRectangle(4, 8, 'r-tile')
   }
 }
 
