@@ -27,12 +27,11 @@ export default React.createClass({
     Interact('#display-grid .tile')
       .draggable({
         snap: {
-          targets: [gridTarget],
-          relativePoints: [ { x: 0, y: 0 } ]
+          targets: [gridTarget]
         },
         restrict: {
           restriction: '#display-grid',
-          elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+          elementRect: { top: 1, left: 1, bottom: 1, right: 1 }
         },
         onmove: (event) => {
           let {target, dx, dy} = event
@@ -50,18 +49,14 @@ export default React.createClass({
       .on('doubletap', (event) => {
         let {target} = event
 
-        setTimeout(() => {
-          let x = (parseFloat(target.getAttribute('data-x')) || 0)
-          let y = (parseFloat(target.getAttribute('data-y')) || 0)
-          let r = (parseInt(target.getAttribute('data-rotation', 10) || 0))
+        let x = (parseFloat(target.getAttribute('data-x')) || 0)
+        let y = (parseFloat(target.getAttribute('data-y')) || 0)
+        let r = (parseInt(target.getAttribute('data-rotation', 10) || 0))
 
-          // if it is horizontal
-          if ((r / 90) % 2 !== 0) {
-            y += 12
-          }
+        target.setAttribute('data-x', x)
+        target.setAttribute('data-y', y)
 
-          target.style.webkitTransform = target.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${r}deg)`
-        }, 10)
+        target.style.webkitTransform = target.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${r}deg)`
       })
   },
 

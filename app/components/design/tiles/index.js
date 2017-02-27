@@ -25,7 +25,7 @@ const tiles = {
   wall: {
     A: createRectangle(1, 4, 'a', '#CCF'),
     BA: createRectangle(1, 3, 'ba', '#CCF'),
-    B: createRectangle(1, 4, 'a', '#CCF'),
+    B: createRectangle(1, 4, 'b', '#CCF'),
     C: createRectangle(1, 5, 'c', '#CCF'),
     D: createRectangle(1, 6, 'd', '#CCF')
   }

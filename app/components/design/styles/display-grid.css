@@ -10,6 +10,11 @@
     position: absolute;
     top: 0;
     left: 0;
+    transform-origin: 0 0
+}
+
+#display-grid > .tile:hover {
+    border: 2px solid yellow;
 }
 
 #display-grid > .tile > .content {
@@ -18,4 +23,5 @@
     text-align: center;
     transform: translateY(-50%);
     line-height: 1;
+    user-select: none;
 }
