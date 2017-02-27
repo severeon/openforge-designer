@@ -1,8 +1,8 @@
 #part-dashboard {
   overflow-y: auto;
-  max-height: 100vh;  
+  max-height: 100vh;
 }
 
-.part {
+#part-dashboard .part {
   margin-bottom: 1em;
 }

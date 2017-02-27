@@ -7,5 +7,5 @@ import routes from './components/routes'
 
 ReactDOM.render(
   <Router routes={routes} history={browserHistory} />,
-  document.getElementById('openlock-designer')
+  document.getElementById('openforge-designer')
 )

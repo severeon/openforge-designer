@@ -1,8 +1,10 @@
 import React from 'react'
 
-import Tiles from './tiles'
-
 import Interact from 'interactjs'
+
+import Tiles from './tiles'
+import Constants from './constants'
+import GridUtils from './grid-utils'
 
 import './styles/display-grid.css'
 
@@ -18,8 +20,8 @@ export default React.createClass({
 
   componentDidMount () {
     let gridTarget = Interact.createSnapGrid({
-      x: 24,
-      y: 24
+      x: Constants.GRID_SPACING_X,
+      y: Constants.GRID_SPACING_Y
     })
 
     Interact('#display-grid .tile')
@@ -35,24 +37,28 @@ export default React.createClass({
         onmove: (event) => {
           let {target, dx, dy} = event
 
-          const clamp = (v) => {
-            if (v < 0) {
-              return -24
-            } else if (v > 0) {
-              return 24
-            }
+          let x = (parseFloat(target.getAttribute('data-x')) || 0) + GridUtils.clamp(dx, Constants.GRID_SPACING_X)
+          let y = (parseFloat(target.getAttribute('data-y')) || 0) + GridUtils.clamp(dy, Constants.GRID_SPACING_Y)
+          let r = (parseInt(target.getAttribute('data-rotation', 10) || 0))
 
-            return 0
-          }
-
-          let x = (parseFloat(target.getAttribute('data-x')) || 0) + clamp(dx)
-          let y = (parseFloat(target.getAttribute('data-y')) || 0) + clamp(dy)
-
-          target.style.webkitTransform = target.style.transform = `translate(${x}px, ${y}px)`
+          target.style.webkitTransform = target.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${r}deg)`
 
           target.setAttribute('data-x', x)
           target.setAttribute('data-y', y)
         }
+      })
+      .on('doubletap', (event) => {
+        let {target} = event
+
+        setImmediate(() => {
+          console.log('after timeout')
+
+          let x = (parseFloat(target.getAttribute('data-x')) || 0)
+          let y = (parseFloat(target.getAttribute('data-y')) || 0)
+          let r = (parseInt(target.getAttribute('data-rotation', 10) || 0))
+
+          target.style.webkitTransform = target.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${r}deg)`
+        })
       })
   },
 
@@ -61,7 +67,7 @@ export default React.createClass({
 
     this.setState({
       parts: this.state.parts.concat([
-        <Tile key={partCount++} />
+        <Tile key={partCount++}>{codename + ' tile'}</Tile>
       ])
     })
   },

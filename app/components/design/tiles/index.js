@@ -6,7 +6,7 @@ const createRectangle = (width, height, className) => {
   return React.createClass({
     displayName: className,
     render () {
-      let props = {width, height, className: className + ' tile'}
+      let props = Object.assign({}, this.props, {width, height, className: className + ' tile'})
       return <RectangularTile {...props} />
     }
   })

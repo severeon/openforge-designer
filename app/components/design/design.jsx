@@ -13,13 +13,13 @@ import DesignGrid from './design-grid'
 import './styles/design.css'
 
 export default React.createClass({
-  displayName: 'openlock-designer',
+  displayName: 'openforge-designer',
   render () {
     return (
       <Grid fluid>
         <Row style={{marginTop: '1em'}}>
           <Col lg={10}>
-            OpenLOCK Designer
+            OpenForge Designer
           </Col>
           <Col lg={2}>
             <DropdownButton id='main-menu' bsStyle='default' title='Menu'>
