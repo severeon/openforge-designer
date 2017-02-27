@@ -35,16 +35,19 @@ class RectangularTile extends React.PureComponent {
     let styles = {
       width: convertFromUnitsToPx(this.props.width),
       height: convertFromUnitsToPx(this.props.height),
-      background: '#CCC'
+      background: this.props.color || '#CCC'
     }
 
     let props = Object.assign({}, this.props, {
       onDoubleClick: this.onDoubleClick
     })
 
+    delete props.color
+    delete props.codename
+
     return (
       <div className='openforge-tile' style={styles} {...props} ref={el => { this.$el = el }}>
-        {this.props.children}
+        <div className='content'>{this.props.children}</div>
       </div>
     )
   }
@@ -53,7 +56,9 @@ class RectangularTile extends React.PureComponent {
 RectangularTile.propTypes = {
   width: React.PropTypes.number.isRequired,
   height: React.PropTypes.number.isRequired,
-  children: React.PropTypes.node
+  codename: React.PropTypes.string.isRequired,
+  children: React.PropTypes.node,
+  color: React.PropTypes.string
 }
 
 export default RectangularTile

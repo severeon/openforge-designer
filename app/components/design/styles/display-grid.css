@@ -11,3 +11,11 @@
     top: 0;
     left: 0;
 }
+
+#display-grid > .tile > .content {
+    position: relative;
+    top: 50%;
+    text-align: center;
+    transform: translateY(-50%);
+    line-height: 1;
+}

@@ -5,26 +5,29 @@ import Tiles from './tiles'
 import './styles/part-dashboard.css'
 
 class PartDashboard extends React.PureComponent {
-  onAddPart (codename) {
+  onAddPart (codename, category) {
     return () => {
-      this.props.onAddPart(codename)
+      this.props.onAddPart(codename, category)
     }
   }
 
   render () {
     let parts = []
 
-    for (let codename in Tiles.floor) {
-      let Tile = Tiles.floor[codename]
-      let tileProps = {
-        key: codename,
-        title: 'Click to Add to Grid',
-        onClick: this.onAddPart(codename)
-      }
+    for (let category in Tiles) {
+      let _tiles = Tiles[category]
+      for (let codename in _tiles) {
+        let Tile = _tiles[codename]
+        let tileProps = {
+          key: codename,
+          title: 'Click to Add to Grid',
+          onClick: this.onAddPart(codename, category)
+        }
 
-      parts.push(
-        <Tile {...tileProps}>{codename + ' tile'}</Tile>
-      )
+        parts.push(
+          <Tile {...tileProps}>{codename}</Tile>
+        )
+      }
     }
 
     return (

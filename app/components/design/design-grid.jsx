@@ -50,24 +50,27 @@ export default React.createClass({
       .on('doubletap', (event) => {
         let {target} = event
 
-        setImmediate(() => {
-          console.log('after timeout')
-
+        setTimeout(() => {
           let x = (parseFloat(target.getAttribute('data-x')) || 0)
           let y = (parseFloat(target.getAttribute('data-y')) || 0)
           let r = (parseInt(target.getAttribute('data-rotation', 10) || 0))
 
+          // if it is horizontal
+          if ((r / 90) % 2 !== 0) {
+            y += 12
+          }
+
           target.style.webkitTransform = target.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${r}deg)`
-        })
+        }, 10)
       })
   },
 
-  onAddPart (codename) {
-    let Tile = Tiles.floor[codename]
+  onAddPart (codename, category = 'floor') {
+    let Tile = Tiles[category][codename]
 
     this.setState({
       parts: this.state.parts.concat([
-        <Tile key={partCount++}>{codename + ' tile'}</Tile>
+        <Tile key={partCount++}>{codename}</Tile>
       ])
     })
   },
