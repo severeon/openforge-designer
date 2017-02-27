@@ -25,16 +25,28 @@ export default React.createClass({
     Interact('#display-grid .tile')
       .draggable({
         snap: {
-          targets: [gridTarget]
+          targets: [gridTarget],
+          relativePoints: [ { x: 0, y: 0 } ]
         },
         restrict: {
-          restriction: 'body'
+          restriction: '#display-grid',
+          elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
         },
         onmove: (event) => {
           let {target, dx, dy} = event
 
-          let x = (parseFloat(target.getAttribute('data-x')) || 0) + dx
-          let y = (parseFloat(target.getAttribute('data-y')) || 0) + dy
+          const clamp = (v) => {
+            if (v < 0) {
+              return -24
+            } else if (v > 0) {
+              return 24
+            }
+
+            return 0
+          }
+
+          let x = (parseFloat(target.getAttribute('data-x')) || 0) + clamp(dx)
+          let y = (parseFloat(target.getAttribute('data-y')) || 0) + clamp(dy)
 
           target.style.webkitTransform = target.style.transform = `translate(${x}px, ${y}px)`
 
