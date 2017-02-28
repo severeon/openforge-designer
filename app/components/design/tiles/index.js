@@ -1,33 +1,19 @@
-import React from 'react'
-
-import RectangularTile from './rectangular-tile'
-
-const createRectangle = (width, height, codename, color) => {
-  return React.createClass({
-    displayName: codename + '-tile',
-    render () {
-      let props = Object.assign({}, this.props, {width, height, codename, color, className: `${codename}-tile tile`})
-      return <RectangularTile {...props} />
-    }
-  })
-}
-
 const tiles = {
   floor: {
-    E: createRectangle(4, 4, 'e'),
-    EA: createRectangle(6, 6, 'ea'),
-    U: createRectangle(8, 8, 'u'),
-    R: createRectangle(4, 8, 'r', '#CFC'),
-    S: createRectangle(2, 4, 'r', '#CFC'),
-    SA: createRectangle(2, 6, 'r', '#CFC'),
-    SB: createRectangle(2, 8, 'r', '#CFC')
+    E: { width: 4, height: 4, codename: 'e', category: 'floor' },
+    EA: { width: 6, height: 6, codename: 'ea', category: 'floor' },
+    U: { width: 8, height: 8, codename: 'u', category: 'floor' },
+    R: { width: 4, height: 8, codename: 'r', category: 'floor', color: '#CFC' },
+    S: { width: 2, height: 4, codename: 's', category: 'floor', color: '#CFC' },
+    SA: { width: 2, height: 6, codename: 'sa', category: 'floor', color: '#CFC' },
+    SB: { width: 2, height: 8, codename: 'sb', category: 'floor', color: '#CFC' }
   },
   wall: {
-    A: createRectangle(1, 4, 'a', '#CCF'),
-    BA: createRectangle(1, 3, 'ba', '#CCF'),
-    B: createRectangle(1, 4, 'b', '#CCF'),
-    C: createRectangle(1, 5, 'c', '#CCF'),
-    D: createRectangle(1, 6, 'd', '#CCF')
+    A: { width: 1, height: 4, codename: 'a', category: 'wall', color: '#CCF' },
+    BA: { width: 1, height: 3, codename: 'ba', category: 'wall', color: '#CCF' },
+    B: { width: 1, height: 4, codename: 'b', category: 'wall', color: '#CCF' },
+    C: { width: 1, height: 5, codename: 'c', category: 'wall', color: '#CCF' },
+    D: { width: 1, height: 6, codename: 'd', category: 'wall', color: '#CCF' }
   }
 }
 

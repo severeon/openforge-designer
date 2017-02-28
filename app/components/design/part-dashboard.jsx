@@ -2,6 +2,8 @@ import React from 'react'
 
 import Tiles from './tiles'
 
+import Rect from './tiles/rectangular-tile'
+
 import './styles/part-dashboard.css'
 
 class PartDashboard extends React.PureComponent {
@@ -17,15 +19,15 @@ class PartDashboard extends React.PureComponent {
     for (let category in Tiles) {
       let _tiles = Tiles[category]
       for (let codename in _tiles) {
-        let Tile = _tiles[codename]
-        let tileProps = {
+        let tileProps = Object.assign({
           key: codename,
           title: 'Click to Add to Grid',
-          onClick: this.onAddPart(codename, category)
-        }
+          onClick: this.onAddPart(codename, category),
+          className: `${codename}-tile tile`
+        }, _tiles[codename])
 
         parts.push(
-          <Tile {...tileProps}>{codename}</Tile>
+          <Rect {...tileProps}>{codename}</Rect>
         )
       }
     }

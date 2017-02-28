@@ -1,79 +1,92 @@
 import React from 'react'
 
-import Interact from 'interactjs'
-
 import Tiles from './tiles'
 import Constants from './constants'
-import GridUtils from './grid-utils'
+import Rect from './tiles/rectangular-tile'
 
 import './styles/display-grid.css'
 
-var partCount = 0
+const snap = function ({x, y}) {
+  let gridx = Math.round(x / Constants.GRID_SPACING_X)
+  let gridy = Math.round(y / Constants.GRID_SPACING_Y)
+
+  let newX = gridx * Constants.GRID_SPACING_X
+  let newY = gridy * Constants.GRID_SPACING_Y
+
+  return { x: newX, y: newY }
+}
 
 export default React.createClass({
-  displayName: 'display-grid',
+  displayName: 'design-grid',
+
   getInitialState () {
     return {
-      parts: []
+      parts: [],
+      dragTarget: null
     }
   },
 
-  componentDidMount () {
-    let gridTarget = Interact.createSnapGrid({
-      x: Constants.GRID_SPACING_X,
-      y: Constants.GRID_SPACING_Y
-    })
-
-    Interact('#display-grid .tile')
-      .draggable({
-        snap: {
-          targets: [gridTarget]
-        },
-        restrict: {
-          restriction: '#display-grid',
-          elementRect: { top: 1, left: 1, bottom: 1, right: 1 }
-        },
-        onmove: (event) => {
-          let {target, dx, dy} = event
-
-          let x = (parseFloat(target.getAttribute('data-x')) || 0) + GridUtils.clamp(dx, Constants.GRID_SPACING_X)
-          let y = (parseFloat(target.getAttribute('data-y')) || 0) + GridUtils.clamp(dy, Constants.GRID_SPACING_Y)
-          let r = (parseInt(target.getAttribute('data-rotation', 10) || 0))
-
-          target.style.webkitTransform = target.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${r}deg)`
-
-          target.setAttribute('data-x', x)
-          target.setAttribute('data-y', y)
-        }
-      })
-      .on('doubletap', (event) => {
-        let {target} = event
-
-        let x = (parseFloat(target.getAttribute('data-x')) || 0)
-        let y = (parseFloat(target.getAttribute('data-y')) || 0)
-        let r = (parseInt(target.getAttribute('data-rotation', 10) || 0))
-
-        target.setAttribute('data-x', x)
-        target.setAttribute('data-y', y)
-
-        target.style.webkitTransform = target.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${r}deg)`
-      })
-  },
-
   onAddPart (codename, category = 'floor') {
-    let Tile = Tiles[category][codename]
-
     this.setState({
       parts: this.state.parts.concat([
-        <Tile key={partCount++}>{codename}</Tile>
+        Object.assign({}, Tiles[category][codename])
       ])
     })
   },
 
+  onMouseUp () {
+    let {parts, dragTarget} = this.state
+
+    if (!parts[dragTarget]) return
+
+    Object.assign(parts[dragTarget], snap(parts[dragTarget]))
+
+    this.setState({ dragTarget: null, parts })
+  },
+
+  onMouseDown (key) {
+    return (event) => {
+      this.setState({ dragTarget: key, startX: event.clientX, startY: event.clientY })
+    }
+  },
+
+  onMouseMove (event) {
+    if (this.state.dragTarget === null) return
+    let {startX, startY, dragTarget, parts} = this.state
+
+    let dx = event.clientX - startX
+    let dy = event.clientY - startY
+
+    Object.assign(parts[dragTarget], { x: (parts[dragTarget].x || 0) + dx, y: (parts[dragTarget].y || 0) + dy })
+    this.setState({ parts, startX: startX + dx, startY: startY + dy })
+  },
+
+  onDoubleClick (key) {
+    return (event) => {
+      let {parts} = this.state
+
+      let rotation = (parts[key].rotation || 0) + 90
+      if (rotation === 360) {
+        rotation = 0
+      }
+
+      parts[key].rotation = rotation
+
+      this.setState({ parts })
+    }
+  },
+
   render () {
     return (
-      <div id='display-grid'>
-        {this.state.parts}
+      <div id='display-grid' onMouseUp={this.onMouseUp} onMouseMove={this.onMouseMove}>
+        {this.state.parts.map((tileProps, idx) => {
+          tileProps.onMouseDown = this.onMouseDown(idx)
+          tileProps.onDoubleClick = this.onDoubleClick(idx)
+
+          return (
+            <Rect key={idx} {...tileProps}>{tileProps.codename}</Rect>
+          )
+        })}
       </div>
     )
   }

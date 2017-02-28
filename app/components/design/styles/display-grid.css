@@ -12,6 +12,8 @@
     left: 0;
     transform-origin: 0 0;
     border: 2px solid RGBA(0,0,0,0.25);
+    user-select: none;
+    cursor: move;
 }
 
 #display-grid > .tile:hover {
@@ -25,4 +27,5 @@
     transform: translateY(-50%);
     line-height: 1;
     user-select: none;
+    cursor: move;
 }
