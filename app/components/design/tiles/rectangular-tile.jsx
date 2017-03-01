@@ -35,8 +35,12 @@ class RectangularTile extends React.Component {
     BAD_PROPS.forEach((k) => delete props[k])
 
     props.className = this.props.codename + '-tile tile openforge-tile'
-    if (this.props.width === 1 || this.props.height === 1) {
+    if (this.props.width === 1) {
       props.className += ' half-tile'
+    }
+
+    if (this.props.height % 2 === 0) {
+      props.className += ' even'
     }
 
     return (

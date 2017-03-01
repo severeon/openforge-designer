@@ -17,6 +17,7 @@
 
 .tile {
     background-size: 100%;
+    box-shadow: inset 1px 1px 5px #000
 }
 
 .e-tile {
@@ -47,8 +48,8 @@
     background-image: url(http://localhost:8080/images/tiles/stone_floor_1x4.stl.png);
 }
 
-.half-tile {
-    transform-origin: 0 50%;
+.half-tile.even {
+    transform-origin: 0 50% !important;
 }
 
 #display-grid > .tile:hover {
