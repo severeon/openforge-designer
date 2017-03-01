@@ -20,7 +20,7 @@ class RectangularTile extends React.Component {
     let styles = {
       width: convertFromUnitsToPx(this.props.width),
       height: convertFromUnitsToPx(this.props.height),
-      background: this.props.color || '#CCC',
+      backgroundColor: this.props.color || '#CCC',
       transform,
       zIndex: RectangularTile.__count++
     }

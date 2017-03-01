@@ -10,10 +10,41 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform-origin: 0 0;
-    border: 2px solid RGBA(0,0,0,0.25);
+    transform-origin: 50% 50%;
     user-select: none;
     cursor: move;
+}
+
+.tile {
+    background-size: 100%;
+}
+
+.e-tile {
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_2x2.stl.png);
+}
+
+.ea-tile {
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_3x3.stl.png);
+}
+
+.u-tile {
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_4x4.stl.png);
+}
+
+.r-tile {
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_2x4.stl.png);
+}
+
+.s-tile {
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_1x2.stl.png);
+}
+
+.sa-tile {
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_1x3.stl.png);
+}
+
+.sb-tile {
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_1x4.stl.png);
 }
 
 #display-grid > .tile:hover {
@@ -21,11 +52,5 @@
 }
 
 #display-grid > .tile > .content {
-    position: relative;
-    top: 50%;
-    text-align: center;
-    transform: translateY(-50%);
-    line-height: 1;
-    user-select: none;
-    cursor: move;
+    display: none
 }
