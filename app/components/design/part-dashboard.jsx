@@ -18,6 +18,9 @@ class PartDashboard extends React.PureComponent {
 
     for (let category in Tiles) {
       let _tiles = Tiles[category]
+      parts.push(
+        <h3 style={{textTransform: 'capitalize'}}>{category} tiles</h3>
+      )
       for (let codename in _tiles) {
         let tileProps = Object.assign({
           key: codename,

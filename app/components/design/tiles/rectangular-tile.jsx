@@ -13,6 +13,8 @@ class RectangularTile extends React.Component {
     this.state = {
       active: false
     }
+
+    this.zIndex = RectangularTile.__count++
   }
   render () {
     let transform = `translate3d(${this.props.x}px, ${this.props.y}px, 0) rotate(${this.props.rotation}deg)`
@@ -22,7 +24,7 @@ class RectangularTile extends React.Component {
       height: convertFromUnitsToPx(this.props.height),
       backgroundColor: this.props.color || '#CCC',
       transform,
-      zIndex: RectangularTile.__count++
+      zIndex: this.zIndex
     }
 
     let props = Object.assign({}, this.props, {
@@ -33,6 +35,9 @@ class RectangularTile extends React.Component {
     BAD_PROPS.forEach((k) => delete props[k])
 
     props.className = this.props.codename + '-tile tile openforge-tile'
+    if (this.props.width === 1 || this.props.height === 1) {
+      props.className += ' half-tile'
+    }
 
     return (
       <div style={styles} {...props} ref={el => { this.$el = el }}>

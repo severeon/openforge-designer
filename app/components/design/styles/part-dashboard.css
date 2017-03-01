@@ -9,6 +9,11 @@
   cursor: pointer;
 }
 
+#part-dashboard > .tile.half-tile {
+  float: left;
+  margin-right: 1rem;
+}
+
 #part-dashboard > .tile > .content {
   position: relative;
   top: 50%;

@@ -47,8 +47,12 @@
     background-image: url(http://localhost:8080/images/tiles/stone_floor_1x4.stl.png);
 }
 
+.half-tile {
+    transform-origin: 0 50%;
+}
+
 #display-grid > .tile:hover {
-    border: 2px solid yellow;
+    outline: 2px solid yellow;
 }
 
 #display-grid > .tile > .content {
