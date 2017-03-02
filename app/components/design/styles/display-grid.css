@@ -21,31 +21,59 @@
 }
 
 .e-tile {
-    background-image: url(http://localhost:8080/images/tiles/stone_floor_2x2.stl.png);
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_2x2.png);
+}
+
+.e-edge-wall-tile {
+    background-image: url(http://localhost:8080/images/tiles/edge_wall_2x2.png);
 }
 
 .ea-tile {
-    background-image: url(http://localhost:8080/images/tiles/stone_floor_3x3.stl.png);
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_3x3.png);
+}
+
+.ea-edge-wall-tile {
+    background-image: url(http://localhost:8080/images/tiles/edge_wall_3x3.png);
 }
 
 .u-tile {
-    background-image: url(http://localhost:8080/images/tiles/stone_floor_4x4.stl.png);
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_4x4.png);
+}
+
+.u-edge-wall-tile {
+    background-image: url(http://localhost:8080/images/tiles/edge_wall_4x4.png);
 }
 
 .r-tile {
-    background-image: url(http://localhost:8080/images/tiles/stone_floor_2x4.stl.png);
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_2x4.png);
+}
+
+.r-edge-wall-tile {
+    background-image: url(http://localhost:8080/images/tiles/edge_wall_2x4.png);
 }
 
 .s-tile {
-    background-image: url(http://localhost:8080/images/tiles/stone_floor_1x2.stl.png);
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_1x2.png);
+}
+
+.s-edge-wall-tile {
+    background-image: url(http://localhost:8080/images/tiles/edge_wall_1x2.png);
 }
 
 .sa-tile {
-    background-image: url(http://localhost:8080/images/tiles/stone_floor_1x3.stl.png);
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_1x3.png);
+}
+
+.sa-edge-wall-tile {
+    background-image: url(http://localhost:8080/images/tiles/edge_wall_1x3.png);
 }
 
 .sb-tile {
-    background-image: url(http://localhost:8080/images/tiles/stone_floor_1x4.stl.png);
+    background-image: url(http://localhost:8080/images/tiles/stone_floor_1x4.png);
+}
+
+.sb-edge-wall-tile {
+    background-image: url(http://localhost:8080/images/tiles/edge_wall_1x4.png);
 }
 
 .half-tile.even {
